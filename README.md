@@ -24,15 +24,15 @@ Follow these steps to get the project set up on your local machine:
 	Alternatively, you can download the project as a ZIP file and extract it to your desired location.
 
 - Navigate to the project directory:
-
+	```
 	cd CacheAPI
-
+	```
 - Build the project using the .NET CLI:
-
+	```
 	dotnet build
-
+	```
 - Run the project:
-
+	```
   	dotnet run
-
+	```
   The API will start up and be accessible at http://localhost:5000/swagger/index.html
