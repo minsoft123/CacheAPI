@@ -7,9 +7,8 @@ Prerequisites
 
 ### Prerequisites ###
 To run this project, you need to have the following software installed on your machine:
-
-    .NET Core SDK
-    Git (optional, if you want to clone the repository)
+	.NET Core SDK
+	Git (optional, if you want to clone the repository)
 
 
 ### Installing ###
