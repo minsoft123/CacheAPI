@@ -52,7 +52,7 @@ namespace CacheAPI.Controllers
                 return Problem(statusCode: StatusCodes.Status507InsufficientStorage, detail: ex.Message);
             }
 
-            return Ok();
+            return NoContent();
         }
 
         [HttpPost("UpsertWithExpirationOptions")]
@@ -64,8 +64,16 @@ namespace CacheAPI.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            await Task.Run(() => _cacheService.UpsertAsync(entry));
-            return Ok();
+            try
+            {
+                await _cacheService.UpsertAsync(entry);
+            }
+            catch (OutOfCacheSizeLimitException ex)
+            {
+                return Problem(statusCode: StatusCodes.Status507InsufficientStorage, detail: ex.Message);
+            }
+
+            return NoContent();
         }
 
         [HttpDelete("Remove/{key}")]
