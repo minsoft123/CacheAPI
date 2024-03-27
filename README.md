@@ -8,8 +8,8 @@ Prerequisites
 ### Prerequisites ###
 To run this project, you need to have the following software installed on your machine:
 
-    .NET Core SDK
-    Git (optional, if you want to clone the repository)
+	.NET Core SDK
+	Git (optional, if you want to clone the repository)
 
 
 ### Installing ###
@@ -17,20 +17,22 @@ Follow these steps to get the project set up on your local machine:
 
 - Clone the repository to your local machine using Git:
   
-	git clone https://github.com/minsoft123/CacheAPI.git
+	```
+ 	git clone https://github.com/minsoft123/CacheAPI.git
+	```
 
 	Alternatively, you can download the project as a ZIP file and extract it to your desired location.
 
 - Navigate to the project directory:
-
+	```
 	cd CacheAPI
-
+	```
 - Build the project using the .NET CLI:
-
+	```
 	dotnet build
-
+	```
 - Run the project:
-
+	```
   	dotnet run
-
+	```
   The API will start up and be accessible at http://localhost:5000/swagger/index.html
