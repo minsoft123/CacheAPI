@@ -17,7 +17,7 @@ Follow these steps to get the project set up on your local machine:
 
 - Clone the repository to your local machine using Git:
   
-	git clone https://github.com/minsoft123/CacheAPI.git
+	```command git clone https://github.com/minsoft123/CacheAPI.git
 
 	Alternatively, you can download the project as a ZIP file and extract it to your desired location.
 
