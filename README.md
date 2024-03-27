@@ -23,7 +23,7 @@ Follow these steps to get the project set up on your local machine:
 
 - Navigate to the project directory:
 
-	cd InMemoryCache
+	cd CacheAPI
 
 - Build the project using the .NET CLI:
 
