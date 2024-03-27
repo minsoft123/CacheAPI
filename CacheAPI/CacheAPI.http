@@ -1,0 +1,6 @@
+@CacheAPI_HostAddress = http://localhost:5150
+
+GET {{CacheAPI_HostAddress}}/
+Accept: application/json
+
+###
