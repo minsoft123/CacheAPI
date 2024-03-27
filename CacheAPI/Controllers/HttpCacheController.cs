@@ -21,7 +21,7 @@ namespace CacheAPI.Controllers
         [Description("Get cache entry by key.")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Get([Required] string key)
+        public async Task<IActionResult> GetAsync([Required] string key)
         {
             try
             {
@@ -35,10 +35,10 @@ namespace CacheAPI.Controllers
 
         [HttpPost("Upsert")]
         [Description("Add or Update cache.")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status507InsufficientStorage)]
-        public async Task<IActionResult> Upsert([FromBody] CacheEntryModel entry)
+        public async Task<IActionResult> UpsertAsync([FromBody] CacheEntryModel entry)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -57,9 +57,9 @@ namespace CacheAPI.Controllers
 
         [HttpPost("UpsertWithExpirationOptions")]
         [Description("Add or Update cache.")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Upsert([FromBody] CacheEntryWithExpirationOptionsModel entry)
+        public async Task<IActionResult> UpsertAsync([FromBody] CacheEntryWithExpirationOptionsModel entry)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -72,7 +72,7 @@ namespace CacheAPI.Controllers
         [Description("Remove cache entry")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Remove([Required] string key)
+        public async Task<IActionResult> RemoveAsync([Required] string key)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -84,7 +84,7 @@ namespace CacheAPI.Controllers
         [HttpDelete("RemoveAll")]
         [Description("Remove all cache entries.")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> RemoveAll()
+        public async Task<IActionResult> RemoveAllAsync()
         {
             await _cacheService.RemoveAllAsync();
             return NoContent();
@@ -93,7 +93,7 @@ namespace CacheAPI.Controllers
         [HttpGet("GetCacheStatistics")]
         [Description("Get current statistics of cache.")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetCacheStatistics()
+        public async Task<IActionResult> GetCacheStatisticsAsync()
         {
             return Ok(await _cacheService.GetCacheStatisticsAsync());
         }
