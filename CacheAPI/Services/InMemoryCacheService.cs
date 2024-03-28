@@ -15,7 +15,7 @@ namespace CacheAPI.Services
             _cache = new MemoryCache(new MemoryCacheOptions()
             {
                 SizeLimit = _cacheSizeLimit,
-                TrackStatistics = true                
+                TrackStatistics = true
             });
 
             _semaphore = new SemaphoreSlim(1);
@@ -43,6 +43,7 @@ namespace CacheAPI.Services
             {
                 await _semaphore.WaitAsync();
 
+                //Check limit reached? before adding new
                 if (_cache.Count >= _cacheSizeLimit && !_cache.TryGetValue(entry.Key, out object? value))
                     throw new OutOfCacheSizeLimitException("cache entry cannot be added because its max cache limit reached.");
 
@@ -60,6 +61,7 @@ namespace CacheAPI.Services
         {
             try
             {
+                //Check limit reached? before adding new
                 if (_cache.Count >= _cacheSizeLimit && !_cache.TryGetValue(entryWithExpirationOptions.Key, out object? value))
                     throw new OutOfCacheSizeLimitException("cache entry cannot be added because its max cache size limit reached.");
 

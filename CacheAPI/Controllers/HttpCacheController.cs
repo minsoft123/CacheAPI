@@ -50,13 +50,17 @@ namespace CacheAPI.Controllers
             try
             {
                 await _cacheService.UpsertAsync(entry);
+                return NoContent();
             }
             catch (OutOfCacheSizeLimitException ex)
             {
                 return Problem(statusCode: StatusCodes.Status507InsufficientStorage, detail: ex.Message);
             }
-
-            return NoContent();
+            catch
+            {
+                return Problem(statusCode: StatusCodes.Status500InternalServerError, detail: "Unexpected error occured.");
+                //ToDo: Log the actual error in the log
+            }
         }
 
         [HttpPost("UpsertWithExpirationOptions")]
@@ -71,13 +75,17 @@ namespace CacheAPI.Controllers
             try
             {
                 await _cacheService.UpsertAsync(entry);
+                return NoContent();
             }
             catch (OutOfCacheSizeLimitException ex)
             {
                 return Problem(statusCode: StatusCodes.Status507InsufficientStorage, detail: ex.Message);
             }
-
-            return NoContent();
+            catch
+            {
+                return Problem(statusCode: StatusCodes.Status500InternalServerError, detail: "Unexpected error occured.");
+                //ToDo: Log the actual error in the log
+            }
         }
 
         [HttpDelete("Remove/{key}")]
