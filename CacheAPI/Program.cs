@@ -16,12 +16,10 @@ namespace CacheAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            //builder.Services.AddOptions<CacheSettings>().Bind(builder.Configuration.GetSection("CacheSettings"))
-            //                                            .ValidateDataAnnotations();
-
             builder.Services.AddSingleton<ICacheService>(provider => 
             {
-                var cacheSettings = builder.Configuration.GetSection("CacheSettings").Get<CacheSettings>();
+                var cacheSettings = builder.Configuration.GetSection("CacheSettings")
+                                                         .Get<CacheSettings>();
                 return new InMemoryCacheService(cacheSettings.CacheSizeLimit);
             });
 
