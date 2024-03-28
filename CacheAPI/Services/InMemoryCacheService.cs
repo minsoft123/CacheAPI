@@ -43,7 +43,7 @@ namespace CacheAPI.Services
             {
                 await _semaphore.WaitAsync();
 
-                if (_cache.Count >= _cacheSizeLimit)
+                if (_cache.Count >= _cacheSizeLimit && !_cache.TryGetValue(entry.Key, out object? value))
                     throw new OutOfCacheSizeLimitException("cache entry cannot be added because its max cache limit reached.");
 
                 _cache.Set(entry.Key, entry.Value, GetCacheEntryOptions());
@@ -60,7 +60,7 @@ namespace CacheAPI.Services
         {
             try
             {
-                if (_cache.Count >= _cacheSizeLimit)
+                if (_cache.Count >= _cacheSizeLimit && !_cache.TryGetValue(entryWithExpirationOptions.Key, out object? value))
                     throw new OutOfCacheSizeLimitException("cache entry cannot be added because its max cache size limit reached.");
 
                 await _semaphore.WaitAsync();

@@ -20,9 +20,13 @@ namespace CacheAPI.Controllers
         [HttpGet("Get/{key}")]
         [Description("Get cache entry by key.")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetAsync([Required] string key)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             try
             {
                 return Ok(await _cacheService.GetAsync(key));
